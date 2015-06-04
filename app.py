@@ -45,7 +45,7 @@ def createUser(username, password):
     db.session.commit()
     return ("{} added to database.".format(username), 201)
 
-def removeUser(username):
+def deleteUser(username):
     user = User.query.filter_by(username = username).first()
     if not user:
         return ("User doesn't exist.", 404)
@@ -60,11 +60,11 @@ def create():
 
     return createUser(username, password)
 
-@app.route('/remove', methods = ['POST'])
+@app.route('/delete', methods = ['POST'])
 def remove():
     username = request.args.get('username')
 
-    return removeUser(username)
+    return deleteUser(username)
 
 @app.route('/authenticate', methods = ['POST'])
 def authenticate():
